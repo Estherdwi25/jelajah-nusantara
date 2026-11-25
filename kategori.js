@@ -65,7 +65,7 @@ function mulai() {
     // Kalau gambarnya belum ada, ikon cadangan yang tampil.
     const img = document.createElement("img");
     img.alt = "";
-    const sumber = it.gambar || `gambar/budaya/${slugP}/${kat}-${i + 1}.png`;
+    const sumber = it.foto || it.gambar || `${kat}-${i + 1}.png`;
     img.addEventListener("error", () => {
       // foto belum ada -> tampilkan ruang foto + nama file yang harus diisi
       g.classList.add("kosong");
