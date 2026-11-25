@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jelajah Nusantara</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="kursor.css">
+  <link rel="stylesheet" href="transisi.css">
+  <link rel="stylesheet" href="detail.css">
+  <link rel="stylesheet" href="gambar.css">
+</head>
+<body>
+
+  <div class="halaman zoom-masuk zoom-keluar" id="halaman">
+    <h1 class="sr-only" id="judul-halaman">Budaya</h1>
+
+    <div class="tata">
+
+      <!-- Panel kiri: daftar gambar + penjelasan yang bergeser bersama -->
+      <section class="kiri" aria-label="Daftar budaya">
+        <div class="area">
+          <div class="kolom-gambar" id="kolom-gambar" tabindex="0" aria-label="Daftar gambar"></div>
+
+          <div class="rel" id="rel" aria-hidden="true"><div class="pegangan" id="pegangan"></div></div>
+
+          <div class="panel-info" id="panel-info" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <!-- Panel kanan: Scan 3D + tombol -->
+      <div class="kanan">
+        <aside class="bingkai-qr" aria-label="Scan 3D">
+          <div class="isi-qr">
+            <div class="judul-qr">Scan 3D</div>
+
+            <a class="qr-kartu" id="qr-kartu" href="qr.html" aria-label="Buka halaman QR Code">
+              <svg class="sudut" viewBox="0 0 100 100" aria-hidden="true">
+                <path d="M10 28V16q0-6 6-6h12M72 10h12q6 0 6 6v12M10 72v12q0 6 6 6h12M72 90h12q6 0 6-6V72"/>
+              </svg>
+              <div class="qr-isi"><img src="gambar/qr-ikon.svg" alt="Ikon QR Code"></div>
+            </a>
+
+            <p class="petunjuk-qr">Ayo pindai QR Code !!</p>
+          </div>
+        </aside>
+
+        <div class="aksi-bawah">
+          <a class="tombol" id="btn-kembali" href="provinsi.html" data-tombol="kembali">Kembali</a>
+          <a class="tombol" href="index.html" data-tombol="beranda">Beranda</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="kursor.js"></script>
+  <script src="gambar.js"></script>
+  <script src="umum.js"></script>
+  <script src="provinsi-data.js"></script>
+  <script src="data-budaya.js"></script>
+  <script src="kategori.js"></script>
+</body>
+</html>

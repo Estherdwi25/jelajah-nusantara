@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Model 3D - Jelajah Nusantara</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="kursor.css">
+  <link rel="stylesheet" href="transisi.css">
+  <link rel="stylesheet" href="model3d.css">
+  <script type="module" src="model-viewer.min.js"></script>
+  <link rel="stylesheet" href="gambar.css">
+</head>
+<body>
+
+  <div class="halaman zoom-masuk zoom-keluar" id="halaman">
+    <div class="tata3d">
+
+      <!-- Kiri: model 3D -->
+      <section class="penampil" aria-label="Model 3D">
+        <model-viewer id="mv" alt="Model 3D" camera-controls auto-rotate shadow-intensity="1"
+                      touch-action="pan-y" ar ar-modes="webxr scene-viewer quick-look">
+          <button slot="ar-button" class="pil kecil tombol-ar" type="button" data-tombol="ar">Lihat di ruanganmu (AR)</button>
+          <div slot="progress-bar" class="muat" aria-hidden="true"><div class="muat-isi" id="muat-isi"></div></div>
+        </model-viewer>
+
+        <div class="galat-m3d" id="galat" hidden></div>
+        <p class="petunjuk-m3d">Geser untuk memutar &middot; cubit atau gulir untuk memperbesar</p>
+      </section>
+
+      <!-- Kanan: informasi + tombol -->
+      <aside class="kanan3d">
+
+        <div class="kartu-info">
+          <h1 id="judul">Model 3D</h1>
+          <p class="subjudul" id="subjudul"></p>
+
+          <div class="deskripsi" id="deskripsi" tabindex="0"></div>
+
+          <div class="varian" id="varian" role="group" aria-label="Pilih versi" hidden></div>
+
+          <a class="btn-info" id="btn-info" href="qr.html" data-transisi data-tombol="info">Klik untuk melihat informasi</a>
+        </div>
+
+        <div class="aksi3d">
+          <a class="pil besar" href="jelajah.html" data-transisi data-tombol="jelajah-lainnya">Jelajah Budaya Lainnya</a>
+          <div class="baris-pil">
+            <a class="pil" id="btn-kembali" href="qr.html" data-transisi data-tombol="kembali">Kembali</a>
+            <a class="pil" href="index.html" data-transisi data-tombol="beranda">Beranda</a>
+          </div>
+        </div>
+
+      </aside>
+    </div>
+  </div>
+
+  <script src="kursor.js"></script>
+  <script src="gambar.js"></script>
+  <script src="umum.js"></script>
+  <script src="provinsi-data.js"></script>
+  <script src="data-budaya.js"></script>
+  <script src="model3d.js"></script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jelajah Nusantara</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="kursor.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="gambar.css">
+</head>
+<body>
+
+  <!-- LATAR: gambar peta seukuran satu layar.
+       >>> Taruh gambarmu di: gambar/peta-indonesia.png  (lihat gambar/PETUNJUK-GAMBAR.txt) -->
+  <div class="peta" id="peta" aria-hidden="true">
+    <img src="gambar/peta-indonesia.png" alt="" onerror="this.remove()">
+  </div>
+
+  <!-- PANEL KIRI (kaca) -->
+  <main class="panel" id="panel">
+    <!-- RUANG LOGO. >>> Taruh gambarmu di: gambar/logo.png -->
+    <div class="logo-beranda" data-slot="gambar/logo.png" data-label="Logo" data-alt="Logo Jelajah Nusantara"></div>
+
+    <h1 class="judul">Jelajah<br>Nusantara</h1>
+
+    <!-- Tampilan 1: menu utama -->
+    <section id="tampilan-menu" class="tampilan">
+      <p class="subjudul">Kenali budaya dari Sabang sampai Merauke.</p>
+      <nav class="menu" aria-label="Menu utama">
+        <!-- Tiap tombol bisa memakai gambar: gambar/tombol/<nama>.png (lihat PETUNJUK-GAMBAR.txt) -->
+        <button class="tombol utama" id="btn-main" data-tombol="main">Main</button>
+        <button class="tombol" id="btn-pengaturan" data-tombol="pengaturan">Pengaturan</button>
+        <button class="tombol" id="btn-tentang" data-tombol="tentang">Tentang Jelajah Nusantara</button>
+        <button class="tombol" id="btn-keluar" data-tombol="keluar">Keluar</button>
+      </nav>
+    </section>
+  </main>
+
+
+  <!-- LAYAR PENGATURAN: latar digelapkan, papan di tengah -->
+  <div class="layar-pengaturan" id="layar-pengaturan" aria-hidden="true">
+    <h2 class="judul-pengaturan">Pengaturan</h2>
+
+    <div class="papan" role="dialog" aria-label="Pengaturan">
+      <div class="atur">
+        <label for="slider-volume">Volume suara</label>
+        <div class="baris-slider">
+          <input type="range" id="slider-volume" min="1" max="100" value="70">
+          <output id="nilai-volume" for="slider-volume">70%</output>
+        </div>
+      </div>
+
+      <div class="atur">
+        <label for="slider-kecerahan">Kecerahan</label>
+        <div class="baris-slider">
+          <input type="range" id="slider-kecerahan" min="1" max="100" value="100">
+          <output id="nilai-kecerahan" for="slider-kecerahan">100%</output>
+        </div>
+      </div>
+
+      <div class="atur">
+        <label for="slider-kursor">Ukuran kursor</label>
+        <div class="baris-slider">
+          <input type="range" id="slider-kursor" min="10" max="100" value="40">
+          <output id="nilai-kursor" for="slider-kursor">40%</output>
+        </div>
+      </div>
+
+    </div>
+
+    <button class="tombol kembali" id="btn-kembali" data-tombol="kembali">Kembali</button>
+  </div>
+
+  <!-- Lapisan peredup layar (untuk kecerahan) -->
+  <div class="peredup" id="peredup"></div>
+
+  <!-- Musik latar (taruh file di folder audio/) -->
+  <audio id="musik" src="audio/musik.mp3" loop></audio>
+
+  <!-- Dialog: Tentang Jelajah Nusantara. Ganti tulisan di dalam <p> sesuai keinginanmu -->
+  <dialog id="dialog-tentang">
+    <h2>Tentang Jelajah Nusantara</h2>
+    <p>Isi halaman ini akan segera hadir.</p>
+    <button class="tombol utama tutup-dialog" type="button" data-tombol="tutup">Tutup</button>
+  </dialog>
+
+  <!-- Dialog: Keluar -->
+  <dialog id="dialog-keluar">
+    <h2>Keluar</h2>
+    <p>Terima kasih sudah menjelajah! Tutup tab ini untuk keluar.</p>
+    <button class="tombol utama tutup-dialog" type="button" data-tombol="tutup">Tutup</button>
+  </dialog>
+
+  <script src="kursor.js"></script>
+  <script src="gambar.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

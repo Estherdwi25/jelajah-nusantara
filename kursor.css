@@ -1,0 +1,4 @@
+/* Kursor sarung tangan dengan jari telunjuk (titik klik = ujung telunjuk) */
+html, body, *, *::before, *::after {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2240%22 height=%2248%22 viewBox=%220 0 40 48%22%3E%3Cg fill=%22%23fff%22 stroke=%22%23123B2B%22 stroke-width=%222%22 stroke-linejoin=%22round%22 stroke-linecap=%22round%22%3E%3Cpath d=%22M9 25V9a5 5 0 0 1 10 0v10a4 4 0 0 1 7-1 4 4 0 0 1 6 1 4 4 0 0 1 4 3v13q0 5-5 7H13q-5-4-6-9l-4-6a3.5 3.5 0 0 1 6-4z%22/%3E%3Cpath d=%22M19 19v8M26 18v9M32 20v7%22 fill=%22none%22/%3E%3Crect x=%2211%22 y=%2241%22 width=%2221%22 height=%226%22 rx=%222%22 fill=%22%23123B2B%22/%3E%3C/g%3E%3C/svg%3E") 14 3, pointer !important;
+}

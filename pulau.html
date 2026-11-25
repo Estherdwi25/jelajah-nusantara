@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jelajah Nusantara</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="kursor.css">
+  <link rel="stylesheet" href="transisi.css">
+  <link rel="stylesheet" href="pulau.css">
+  <link rel="stylesheet" href="gambar.css">
+</head>
+<body>
+
+  <div class="peta" id="peta">
+    <svg id="svg" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" aria-label="Peta provinsi">
+      <g id="lapisan"></g>
+      <!-- salinan provinsi yang sedang disorot (timbul & bercahaya) -->
+      <g id="lapisan-sorot" pointer-events="none"></g>
+    </svg>
+  </div>
+
+  <h1 class="judul-pulau" id="judul">Pulau</h1>
+
+  <!-- Nama provinsi yang mengikuti kursor -->
+  <div class="label-provinsi" id="label-provinsi" aria-hidden="true"></div>
+
+  <!-- Kartu informasi pulau / provinsi (berubah saat kursor menyentuh provinsi) -->
+  <aside class="kartu-info" id="kartu-info" aria-live="polite">
+    <div class="judul-kartu" id="judul-kartu">Pulau</div>
+    <div class="isi-kartu" id="isi-kartu"></div>
+  </aside>
+
+  <div class="aksi-kartu" id="aksi-kartu">
+    <a class="tombol" id="btn-kembali" href="jelajah.html" data-tombol="kembali">Kembali</a>
+    <a class="tombol" href="index.html" data-tombol="beranda">Beranda</a>
+  </div>
+
+  <p class="atribusi">Data batas provinsi: denyherianto/indonesia-geojson-topojson-maps-with-38-provinces (CC BY 4.0)</p>
+
+  <div class="peredup" id="peredup"></div>
+
+  <script src="kursor.js"></script>
+  <script src="gambar.js"></script>
+  <script src="provinsi-data.js"></script>
+  <script src="informasi-provinsi.js"></script>
+  <script src="pulau.js"></script>
+</body>
+</html>

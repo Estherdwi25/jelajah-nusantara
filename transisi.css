@@ -1,0 +1,25 @@
+/* Efek "zoom buram" yang dipakai bersama oleh beberapa halaman */
+
+/* Masuk: mulai buram & membesar, lalu mengecil dan menajam */
+@keyframes zoomMasuk {
+  from { opacity: 0; filter: blur(18px); transform: scale(1.18); }
+  to   { opacity: 1; filter: blur(0);    transform: scale(1); }
+}
+.zoom-masuk { animation: zoomMasuk .85s cubic-bezier(.2, .7, .2, 1) backwards; }
+
+/* Keluar: membesar, memburam, memudar (tambahkan .zoom-keluar lalu .jalan) */
+.zoom-keluar {
+  transition: transform .9s cubic-bezier(.65, 0, .25, 1),
+              filter .9s ease,
+              opacity .8s ease .1s;
+}
+.zoom-keluar.jalan {
+  transform: scale(var(--skala, 1.8));
+  filter: blur(14px);
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zoom-masuk { animation: none; }
+  .zoom-keluar { transition-duration: .01s; }
+}

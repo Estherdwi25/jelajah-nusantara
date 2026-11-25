@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jelajah Nusantara</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="kursor.css">
+  <link rel="stylesheet" href="transisi.css">
+  <link rel="stylesheet" href="budaya.css">
+  <link rel="stylesheet" href="gambar.css">
+</head>
+<body>
+
+  <div class="halaman zoom-masuk zoom-keluar" id="halaman">
+    <div class="bingkai">
+
+      <div class="konten" id="konten">
+        <h1 class="judul" id="nama-provinsi">Provinsi</h1>
+
+        <section class="kartu-grid" aria-label="Kategori budaya">
+
+          <a class="kartu" data-kategori="pakaian" href="#">
+            <div class="gambar">
+              <img alt="">
+              <div class="cadangan"><b>Tempat foto</b><small></small></div>
+            </div>
+            <div class="label">Pakaian Tradisional</div>
+          </a>
+
+          <a class="kartu" data-kategori="rumah" href="#">
+            <div class="gambar">
+              <img alt="">
+              <div class="cadangan"><b>Tempat foto</b><small></small></div>
+            </div>
+            <div class="label">Rumah Tradisional</div>
+          </a>
+
+          <a class="kartu" data-kategori="alat-musik" href="#">
+            <div class="gambar">
+              <img alt="">
+              <div class="cadangan"><b>Tempat foto</b><small></small></div>
+            </div>
+            <div class="label">Alat Musik Tradisional</div>
+          </a>
+
+          <a class="kartu" data-kategori="makanan" href="#">
+            <div class="gambar">
+              <img alt="">
+              <div class="cadangan"><b>Tempat foto</b><small></small></div>
+            </div>
+            <div class="label">Makanan Khas Daerah</div>
+          </a>
+
+        </section>
+      </div>
+
+      <div class="aksi" id="aksi">
+        <a class="tombol" id="btn-kembali" href="pulau.html" data-tombol="kembali">Kembali</a>
+        <a class="tombol" href="index.html" data-tombol="beranda">Beranda</a>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="kursor.js"></script>
+  <script src="gambar.js"></script>
+  <script src="umum.js"></script>
+  <script src="provinsi-data.js"></script>
+  <script src="provinsi.js"></script>
+</body>
+</html>

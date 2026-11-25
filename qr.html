@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Scan 3D - Jelajah Nusantara</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="kursor.css">
+  <link rel="stylesheet" href="transisi.css">
+  <link rel="stylesheet" href="budaya.css">
+  <link rel="stylesheet" href="qr.css">
+  <link rel="stylesheet" href="gambar.css">
+</head>
+<body>
+
+  <div class="halaman zoom-masuk zoom-keluar" id="halaman">
+    <div class="bingkai">
+
+      <div class="konten qr-konten">
+        <h1 class="judul judul-pindai">Scan 3D</h1>
+        <p class="sub-pindai">Arahkan kamera ke QR Code di balik flashcard</p>
+
+        <!-- Jendela kamera -->
+        <div class="pemindai" id="pemindai">
+          <video id="video" playsinline muted></video>
+          <svg class="sudut" viewBox="0 0 100 100" aria-hidden="true">
+            <path d="M10 28V16q0-6 6-6h12M72 10h12q6 0 6 6v12M10 72v12q0 6 6 6h12M72 90h12q6 0 6-6V72"/>
+          </svg>
+          <div class="garis-pindai" aria-hidden="true"></div>
+          <div class="pesan-kamera" id="pesan-kamera">Membuka kamera&hellip;</div>
+        </div>
+
+        <p class="status" id="status" role="status" aria-live="polite"></p>
+        <p class="diagnosis" id="diagnosis" hidden></p>
+
+        <!-- Kalau kamera bermasalah: coba lagi, atau pindai dari foto (jalan juga tanpa izin kamera) -->
+        <div class="aksi-kamera">
+          <button class="tombol" id="btn-coba" type="button" data-tombol="coba-kamera" hidden>Coba kamera lagi</button>
+          <label class="tombol" id="btn-foto" data-tombol="pindai-foto">Pindai dari foto
+            <input class="sr-only" type="file" id="input-foto" accept="image/*" capture="environment">
+          </label>
+        </div>
+
+        <!-- Hasil pemindaian -->
+        <div class="hasil" id="hasil" hidden>
+          <h2 id="hasil-judul"></h2>
+          <p id="hasil-isi"></p>
+          <div class="hasil-aksi">
+            <a class="tombol utama" id="hasil-buka" href="#" target="_blank" rel="noopener" hidden data-tombol="buka-model"><span class="teks-tombol">Buka model 3D</span></a>
+            <button class="tombol" id="btn-ulang" type="button" data-tombol="pindai-lagi">Pindai lagi</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="aksi">
+        <a class="tombol" id="btn-kembali" href="kategori.html" data-tombol="kembali">Kembali</a>
+        <a class="tombol" href="index.html" data-tombol="beranda">Beranda</a>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="kursor.js"></script>
+  <script src="gambar.js"></script>
+  <script src="umum.js"></script>
+  <script src="data-budaya.js"></script>
+  <script src="jsQR.js"></script>
+  <script src="qr.js"></script>
+</body>
+</html>

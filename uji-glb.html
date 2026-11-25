@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Uji File GLB - Jelajah Nusantara</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="kursor.css">
+  <script type="module" src="model-viewer.min.js"></script>
+  <style>
+    :root { --abu: #C8D0DA; --muda: #EEF0F3; }
+    * { box-sizing: border-box; margin: 0; }
+    body { font-family: "Poppins", system-ui, sans-serif; background: var(--abu); color: #000; min-height: 100vh; padding: 2rem 5.6vw 3rem; }
+    h1 { font-weight: 800; font-size: clamp(1.4rem, 2.4vw, 2.2rem); }
+    .sub { font-weight: 500; margin: .25rem 0 1.5rem; }
+    .tata { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 1.5rem; align-items: start; }
+    .kartu { background: #fff; border-radius: 1.75rem; padding: 1.25rem; }
+    .penampil { position: relative; height: min(70vh, 40rem); border-radius: 1.25rem; overflow: hidden; background: var(--muda); }
+    model-viewer { width: 100%; height: 100%; --poster-color: transparent; }
+    .kosong { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 2rem; line-height: 1.6; }
+    .kosong.seret { background: #dbe7d6; }
+    .kosong[hidden] { display: none; }
+    .tombol { display: inline-block; padding: .7rem 1.6rem; font: 600 1rem "Poppins", sans-serif; background: var(--abu); border: 0; border-radius: 999px; cursor: pointer; text-decoration: none; color: #000; }
+    .tombol:hover { filter: brightness(.95); }
+    input[type=file] { position: absolute; width: 1px; height: 1px; opacity: 0; }
+    h2 { font-weight: 700; font-size: 1.05rem; margin-bottom: .5rem; }
+    .info { margin-bottom: 1.25rem; line-height: 1.6; font-size: .92rem; }
+    .info b { font-weight: 600; }
+    .ok { color: #1c6b3a; font-weight: 600; } .awas { color: #a15b00; font-weight: 600; } .salah { color: #b3261e; font-weight: 600; }
+    .kode { display: block; margin: .35rem 0 .75rem; padding: .65rem .8rem; background: var(--muda); border-radius: .75rem; font: 500 .8rem ui-monospace, Consolas, monospace; word-break: break-all; }
+    ol { padding-left: 1.2rem; line-height: 1.6; font-size: .92rem; }
+    li { margin-bottom: .6rem; }
+    .baris { display: flex; gap: .75rem; flex-wrap: wrap; margin-top: 1rem; }
+    @media (max-width: 900px) { .tata { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <h1>Uji File GLB</h1>
+  <p class="sub">Lihat file model 3D-mu langsung di sini, tanpa perlu mengubah data apa pun dulu.</p>
+
+  <div class="tata">
+    <section class="kartu">
+      <div class="penampil" id="penampil">
+        <model-viewer id="mv" alt="Model 3D uji" camera-controls auto-rotate shadow-intensity="1" touch-action="pan-y"></model-viewer>
+        <div class="kosong" id="kosong">
+          <div>
+            <p><b>Tarik file .glb ke sini</b><br>atau klik tombol di bawah</p>
+          </div>
+        </div>
+      </div>
+      <div class="baris">
+        <label class="tombol">Pilih file GLB
+          <input type="file" id="berkas" accept=".glb,.gltf,model/gltf-binary">
+        </label>
+        <a class="tombol" href="index.html">Beranda</a>
+      </div>
+    </section>
+
+    <section class="kartu">
+      <h2>Hasil pemeriksaan</h2>
+      <div class="info" id="info">Belum ada file dipilih.</div>
+
+      <h2>Cara memakainya di aplikasi</h2>
+      <ol>
+        <li>Salin file ke folder <b>model3d/</b>. Beri nama huruf kecil tanpa spasi, misalnya <b id="nama1">aceh-pakaian-1.glb</b>.</li>
+        <li>Buka <b>data-budaya.js</b>, lalu isi pada item yang sesuai:
+          <span class="kode" id="kode-data">model3d: "model3d/aceh-pakaian-1.glb",</span></li>
+        <li>Uji langsung tanpa QR dengan membuka alamat ini di browser:
+          <span class="kode" id="kode-url">model3d.html?src=model3d/aceh-pakaian-1.glb&amp;nama=Uji</span></li>
+      </ol>
+    </section>
+  </div>
+
+  <script src="kursor.js"></script>
+  <script>
+    const mv = document.getElementById("mv");
+    const kosong = document.getElementById("kosong");
+    const info = document.getElementById("info");
+    const penampil = document.getElementById("penampil");
+    let urlSementara = null;
+
+    function bersihkanNama(nama) {
+      return nama.toLowerCase().replace(/\.(glb|gltf)$/, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "model";
+    }
+
+    function muat(berkas) {
+      if (!berkas) return;
+      const ekstensi = (berkas.name.match(/\.(glb|gltf)$/i) || [])[1];
+      if (!ekstensi) {
+        info.innerHTML = '<span class="salah">File ini bukan .glb.</span> Ekspor ulang dari Blender lewat File &gt; Export &gt; glTF 2.0 &gt; pilih "glTF Binary (.glb)".';
+        return;
+      }
+      if (urlSementara) URL.revokeObjectURL(urlSementara);
+      urlSementara = URL.createObjectURL(berkas);
+
+      const mb = berkas.size / 1048576;
+      const catatan = mb > 15 ? '<span class="salah">Sangat besar</span>, kemungkinan lambat sekali di HP. Kecilkan tekstur dan jumlah poligon.'
+                    : mb > 8  ? '<span class="awas">Cukup besar</span>, bisa lambat di HP. Usahakan di bawah 5-8 MB.'
+                    :           '<span class="ok">Ukuran aman</span> untuk HP.';
+      info.innerHTML = `<b>Nama:</b> ${berkas.name}<br><b>Ukuran:</b> ${mb.toFixed(2)} MB, ${catatan}<br><b>Status:</b> <span id="status">sedang dimuat…</span>`;
+
+      const nama = bersihkanNama(berkas.name) + "." + ekstensi.toLowerCase();
+      document.getElementById("nama1").textContent = nama;
+      document.getElementById("kode-data").textContent = `model3d: "model3d/${nama}",`;
+      document.getElementById("kode-url").textContent = `model3d.html?src=model3d/${nama}&nama=Uji`;
+
+      kosong.hidden = true;
+      mv.src = urlSementara;
+    }
+
+    mv.addEventListener("load", () => { const s = document.getElementById("status"); if (s) s.innerHTML = '<span class="ok">Berhasil dimuat</span>'; });
+    mv.addEventListener("error", () => {
+      const s = document.getElementById("status");
+      if (s) s.innerHTML = '<span class="salah">Gagal dimuat.</span> File mungkin rusak atau memakai kompresi yang butuh internet (Draco / KTX2).';
+    });
+
+    document.getElementById("berkas").addEventListener("change", (e) => muat(e.target.files[0]));
+
+    ["dragenter", "dragover"].forEach((n) => penampil.addEventListener(n, (e) => { e.preventDefault(); kosong.classList.add("seret"); }));
+    ["dragleave", "drop"].forEach((n) => penampil.addEventListener(n, (e) => { e.preventDefault(); kosong.classList.remove("seret"); }));
+    penampil.addEventListener("drop", (e) => muat(e.dataTransfer.files[0]));
+  </script>
+</body>
+</html>

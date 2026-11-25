@@ -1,0 +1,263 @@
+:root {
+  --laut: #BFE3F5;
+  --darat: #A9DDA0;
+  --tinta: #123B2B;
+  --kaca: rgba(255, 255, 255, .38);
+  --kaca-garis: rgba(255, 255, 255, .7);
+}
+
+* { box-sizing: border-box; margin: 0; }
+
+html, body { height: 100%; }
+
+body {
+  font-family: "Poppins", system-ui, sans-serif;
+  color: var(--tinta);
+  background: var(--laut);
+  overflow: hidden;
+}
+
+[hidden] { display: none !important; }
+
+/* ---------- Peta latar ---------- */
+.peta {
+  position: fixed;
+  inset: 0;
+  background: var(--laut);
+  transform-origin: 45% 70%; /* arah zoom, kira-kira ke Pulau Jawa */
+  transition: transform 1s cubic-bezier(.6, 0, .2, 1);
+}
+.peta img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* ---------- Panel kaca (kiri, ~60%) ---------- */
+.panel {
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  width: 60%;
+  padding: clamp(2rem, 6vw, 6rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
+  overflow-y: auto;
+
+  background: var(--kaca);
+  -webkit-backdrop-filter: blur(16px) saturate(1.2);
+  backdrop-filter: blur(16px) saturate(1.2);
+  border-right: 1px solid var(--kaca-garis);
+  box-shadow: 8px 0 40px rgba(18, 59, 43, .12);
+
+  transition: transform .8s cubic-bezier(.6, 0, .2, 1), opacity .6s ease;
+}
+
+.judul {
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-size: clamp(3rem, 8vw, 7rem);
+  line-height: .95;
+  letter-spacing: -.02em;
+}
+
+.tampilan {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.subjudul {
+  font-size: clamp(1rem, 1.6vw, 1.25rem);
+  font-weight: 500;
+  max-width: 32ch;
+  line-height: 1.5;
+}
+
+.judul-bagian {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.75rem;
+}
+
+/* ---------- Menu & tombol ---------- */
+.menu {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .75rem;
+  margin-top: .5rem;
+}
+
+.tombol {
+  font: 600 1.15rem "Poppins", sans-serif;
+  color: var(--tinta);
+  background: rgba(255, 255, 255, .5);
+  border: 1px solid var(--kaca-garis);
+  border-radius: 999px;
+  padding: .75rem 2.5rem;
+  min-width: 13rem;
+  text-align: left;
+  cursor: pointer;
+  transition: background .2s, transform .2s;
+}
+.tombol:hover { background: rgba(255, 255, 255, .85); transform: translateX(6px); }
+.tombol:focus-visible { outline: 3px solid var(--tinta); outline-offset: 3px; }
+
+.tombol.utama {
+  background: var(--tinta);
+  color: #fff;
+  border-color: var(--tinta);
+}
+.tombol.utama:hover { background: #1c5a42; }
+
+/* ---------- Slider pengaturan ---------- */
+.atur { display: flex; flex-direction: column; gap: .4rem; max-width: 26rem; }
+.atur label { font-weight: 600; font-size: 1.1rem; }
+
+.baris-slider { display: flex; align-items: center; gap: 1rem; }
+.baris-slider output {
+  min-width: 3.5ch;
+  text-align: right;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+input[type="range"] {
+  flex: 1;
+  height: 8px;
+  appearance: none;
+  -webkit-appearance: none;
+  background: rgba(18, 59, 43, .25);
+  border-radius: 999px;
+  cursor: pointer;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: var(--tinta);
+  border: 3px solid #fff;
+}
+input[type="range"]::-moz-range-thumb {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--tinta);
+  border: 3px solid #fff;
+}
+input[type="range"]:focus-visible { outline: 3px solid var(--tinta); outline-offset: 6px; }
+
+
+/* ---------- Layar pengaturan ---------- */
+.layar-pengaturan {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  background: rgba(0, 0, 0, .7);   /* remang-remang: latar masih tampak */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .35s ease, visibility .35s;
+}
+.layar-pengaturan.buka { opacity: 1; visibility: visible; }
+
+.judul-pengaturan {
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  color: #fff;
+}
+
+.papan {
+  width: min(60vw, 60rem);
+  height: 60vh;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+  overflow-y: auto;
+
+  background: rgba(255, 255, 255, .78);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--kaca-garis);
+  border-radius: 1.5rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, .35);
+  transform: translateY(12px) scale(.98);
+  transition: transform .35s ease;
+}
+.layar-pengaturan.buka .papan { transform: none; }
+
+.papan .atur { max-width: none; }
+
+
+.tombol.kembali {
+  position: absolute;
+  left: 2rem;
+  bottom: 2rem;
+  min-width: 0;
+}
+
+@media (max-width: 800px) {
+  .papan { width: 92vw; height: auto; max-height: 70vh; }
+  .tombol.kembali { left: 1rem; bottom: 1rem; }
+}
+
+/* ---------- Peredup (kecerahan) ---------- */
+.peredup {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* ---------- Logo (slot gambar) ---------- */
+.logo-beranda {
+  width: clamp(8rem, 16vw, 14rem);
+  height: clamp(4rem, 12vh, 7.5rem);
+  justify-self: start;
+}
+.logo-beranda img { object-position: left center; }
+
+/* ---------- Ukuran gambar tombol (dipakai bila gambar tombol diisi) ---------- */
+.menu .tombol { --tinggi-tombol: 4.2rem; }
+.tombol.kembali { --tinggi-tombol: 3.2rem; }
+dialog .tombol { --tinggi-tombol: 3rem; }
+
+/* ---------- Dialog ---------- */
+dialog {
+  margin: auto;
+  padding: 2rem;
+  border: 1px solid var(--kaca-garis);
+  border-radius: 1.5rem;
+  background: rgba(255, 255, 255, .88);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  color: var(--tinta);
+  max-width: 24rem;
+}
+dialog::backdrop { background: rgba(18, 59, 43, .25); }
+dialog h2 { font-family: "Poppins", sans-serif; margin-bottom: .5rem; }
+dialog p { margin-bottom: 1.25rem; line-height: 1.5; }
+
+/* ---------- Transisi saat menekan "Main" ---------- */
+body.mulai .panel { transform: translateX(-100%); opacity: 0; }
+body.mulai .peta  { transform: scale(2.2); }
+
+/* ---------- Layar kecil: panel penuh ---------- */
+@media (max-width: 800px) {
+  .panel { width: 100%; border-right: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .peta, .panel, .tombol { transition-duration: .01s; }
+}

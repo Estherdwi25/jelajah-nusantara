@@ -1,0 +1,82 @@
+.qr-konten { align-items: center; text-align: center; overflow-y: auto; padding-bottom: 5vh; }
+
+.judul-pindai { font-size: clamp(1.8rem, 4vw, 4rem); padding-top: 3vh; }
+.sub-pindai { margin-top: .4rem; font-size: clamp(.95rem, 1.5vw, 1.6rem); opacity: .75; }
+
+/* ---------- Jendela kamera ---------- */
+.pemindai {
+  position: relative;
+  width: min(42vh, 76vw);
+  aspect-ratio: 1;
+  margin: 2.5vh 0 1.5vh;
+  overflow: hidden;
+  background: var(--kartu);
+  border-radius: clamp(1.5rem, 3vw, 3.5rem);
+}
+.pemindai video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: none;
+}
+.pemindai.menyala video { display: block; }
+
+.pemindai .sudut {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  fill: none; stroke: #fff; stroke-width: 3; stroke-linecap: round;
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, .6));
+}
+.pemindai:not(.menyala) .sudut { stroke: var(--hitam); filter: none; }
+
+.garis-pindai {
+  position: absolute;
+  left: 12%; right: 12%; top: 12%;
+  height: 3px;
+  background: rgba(255, 255, 255, .9);
+  box-shadow: 0 0 10px 2px rgba(255, 255, 255, .7);
+  border-radius: 3px;
+  opacity: 0;
+  animation: pindai 2.2s ease-in-out infinite alternate;
+}
+.pemindai.menyala .garis-pindai { opacity: 1; }
+@keyframes pindai { from { top: 12%; } to { top: 86%; } }
+
+.pesan-kamera {
+  position: absolute; inset: 0;
+  display: grid; place-items: center;
+  padding: 1.25rem;
+  overflow-y: auto;
+  line-height: 1.45;
+  font-size: clamp(.78rem, 1.05vw, 1.05rem);
+}
+.pemindai.menyala .pesan-kamera { display: none; }
+
+.status { min-height: 1.5em; font-size: clamp(.9rem, 1.35vw, 1.4rem); }
+
+/* ---------- Hasil ---------- */
+.hasil {
+  width: min(32rem, 100%);
+  margin-top: 1rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--kartu);
+  border-radius: 1.75rem;
+  animation: munculHasil .3s ease both;
+}
+@keyframes munculHasil { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.hasil h2 { font-size: clamp(1.1rem, 1.8vw, 1.8rem); }
+.hasil p  { margin: .4rem 0 1rem; line-height: 1.4; word-break: break-word; }
+.hasil-aksi { display: flex; flex-wrap: wrap; gap: .75rem; justify-content: center; }
+.hasil .tombol { box-shadow: none; background: #fff; }
+.hasil .tombol.utama { background: var(--hitam); color: #fff; }
+
+@media (prefers-reduced-motion: reduce) {
+  .garis-pindai { animation: none; top: 50%; }
+}
+
+/* ---------- Bantuan kamera ---------- */
+.diagnosis { max-width: 38rem; margin-top: .25rem; font-size: .78rem; opacity: .65; word-break: break-word; }
+.aksi-kamera { display: flex; flex-wrap: wrap; gap: .75rem; justify-content: center; margin-top: .75rem; }
+.aksi-kamera .tombol { display: inline-block; cursor: pointer; box-shadow: none; background: var(--kartu); --tinggi-tombol: 3rem; }
+.aksi-kamera .tombol[hidden] { display: none; }
+.hasil-aksi .tombol { --tinggi-tombol: 3rem; }
+.sr-only { position: absolute; width: 1px; height: 1px; opacity: 0; overflow: hidden; pointer-events: none; }
